@@ -1,0 +1,1132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketPulse | E-Commerce Intelligence Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --primary-dark: #2e59d9;
+            --secondary: #858796;
+            --success: #1cc88a;
+            --info: #36b9cc;
+            --warning: #f6c23e;
+            --danger: #e74a3b;
+            --light: #f8f9fc;
+            --dark: #5a5c69;
+            --bg-gradient: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+            --card-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        }
+        
+        body {
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+            background-color: #f8f9fc;
+            color: #444;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: var(--bg-gradient);
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.2);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Dashboard Header */
+        .dashboard-header {
+            background: var(--bg-gradient);
+            color: white;
+            padding: 25px 0;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 2rem 0 rgba(58, 59, 69, 0.25);
+        }
+        
+        .card-header {
+            background-color: #f8f9fc;
+            border-bottom: 1px solid #e3e6f0;
+            font-weight: 700;
+            padding: 15px 20px;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        
+        /* Stats Cards */
+        .stats-card {
+            border-left: 4px solid;
+            overflow: hidden;
+        }
+        
+        .stats-card.primary { border-left-color: var(--primary); }
+        .stats-card.success { border-left-color: var(--success); }
+        .stats-card.info { border-left-color: var(--info); }
+        .stats-card.warning { border-left-color: var(--warning); }
+        .stats-card.danger { border-left-color: var(--danger); }
+        
+        .stats-icon {
+            font-size: 1.8rem;
+            opacity: 0.3;
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+        }
+        
+        /* Category badges */
+        .category-badge {
+            font-size: 0.75rem;
+            padding: 0.35rem 0.5rem;
+            border-radius: 0.35rem;
+            font-weight: 600;
+        }
+        
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        
+        /* Tables */
+        .data-table {
+            font-size: 0.9rem;
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(78, 115, 223, 0.05);
+        }
+        
+        /* Trend indicators */
+        .trend-indicator {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.35rem;
+            font-weight: 600;
+        }
+        
+        .trend-up {
+            background-color: rgba(28, 200, 138, 0.2);
+            color: var(--success);
+        }
+        
+        .trend-down {
+            background-color: rgba(231, 74, 59, 0.2);
+            color: var(--danger);
+        }
+        
+        /* Filters */
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+        }
+        
+        /* Tabs */
+        .nav-tabs .nav-link {
+            color: var(--secondary);
+            font-weight: 600;
+            border: none;
+            padding: 0.8rem 1.2rem;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            background: transparent;
+        }
+        
+        /* Footer */
+        footer {
+            background: white;
+            box-shadow: 0 -0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+        }
+        
+        /* KPI highlights */
+        .kpi-highlight {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .kpi-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--secondary);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 250px;
+            }
+            
+            .stats-icon {
+                display: none;
+            }
+        }
+        
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        /* Custom button styles */
+        .btn-market {
+            background: var(--bg-gradient);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.35rem;
+        }
+        
+        .btn-market:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-chart-network me-2"></i>MarketPulse
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-database me-1"></i> Data Sources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-chart-line me-1"></i> Analytics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-cog me-1"></i> Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1><i class="fas fa-analytics me-2"></i>E-Commerce Intelligence Dashboard</h1>
+                    <p class="lead mb-0">Real-time insights into Indian e-commerce markets</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="btn-group">
+                        <button class="btn btn-outline-light">
+                            <i class="fas fa-file-export me-1"></i> Export Report
+                        </button>
+                        <button class="btn btn-light">
+                            <i class="fas fa-sync-alt me-1"></i> Refresh Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <!-- Filters -->
+        <div class="filter-section">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <label for="categoryFilter" class="form-label">Category</label>
+                    <select class="form-select" id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="Mobiles">Mobiles</option>
+                        <option value="Laptops">Laptops</option>
+                        <option value="Tablets">Tablets</option>
+                        <option value="Smartwatches">Smartwatches</option>
+                        <option value="Televisions">Televisions</option>
+                        <option value="Air Conditioners">Air Conditioners</option>
+                        <option value="Refrigerators">Refrigerators</option>
+                        <option value="Washing Machines">Washing Machines</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <label for="priceFilter" class="form-label">Price Range</label>
+                    <select class="form-select" id="priceFilter">
+                        <option value="">All Prices</option>
+                        <option value="low">Low (Under ₹15,000)</option>
+                        <option value="medium">Medium (₹15,000 - ₹30,000)</option>
+                        <option value="high">High (₹30,000 - ₹50,000)</option>
+                        <option value="premium">Premium (Above ₹50,000)</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <label for="trendFilter" class="form-label">Trend Direction</label>
+                    <select class="form-select" id="trendFilter">
+                        <option value="">All Trends</option>
+                        <option value="up">Increasing Trend</option>
+                        <option value="down">Decreasing Trend</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <label for="dateFilter" class="form-label">Time Range</label>
+                    <select class="form-select" id="dateFilter">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30" selected>Last 30 Days</option>
+                        <option value="90">Last 90 Days</option>
+                        <option value="365">Last Year</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card stats-card primary h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Products Tracked</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">142</div>
+                                <div class="mt-2 text-success">
+                                    <small><i class="fas fa-arrow-up me-1"></i> 12% since last month</small>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-box stats-icon text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stats-card success h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Categories</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                                <div class="mt-2 text-info">
+                                    <small>Across 2 platforms</small>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-list-alt stats-icon text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stats-card info h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    Avg Price</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">₹28,450</div>
+                                <div class="mt-2 text-danger">
+                                    <small><i class="fas fa-arrow-down me-1"></i> 2.3% from last quarter</small>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-rupee-sign stats-icon text-info"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card stats-card warning h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Top Trending Category</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Mobiles</div>
+                                <div class="mt-2 text-success">
+                                    <small><i class="fas fa-arrow-up me-1"></i> 22% trend increase</small>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-mobile-alt stats-icon text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Intelligence Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="m-0"><i class="fas fa-globe-asia me-2"></i>India E-Commerce Market Intelligence</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="kpi-highlight text-primary">$125B</div>
+                                <div class="kpi-label">Market Size (FY24)</div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="kpi-highlight text-success">15%</div>
+                                <div class="kpi-label">Projected CAGR</div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="kpi-highlight text-info">33%</div>
+                                <div class="kpi-label">Fashion & Apparel Share</div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="kpi-highlight text-warning">$143.75B</div>
+                                <div class="kpi-label">Projected Next Year</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <ul class="nav nav-tabs mt-4" id="dashboardTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products" type="button" role="tab">Product Analytics</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="trends-tab" data-bs-toggle="tab" data-bs-target="#trends" type="button" role="tab">Market Trends</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button" role="tab">Payment Analytics</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="recommendations-tab" data-bs-toggle="tab" data-bs-target="#recommendations" type="button" role="tab">Recommendations</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="dashboardTabsContent">
+            <!-- Products Tab -->
+            <div class="tab-pane fade show active" id="products" role="tabpanel">
+                <div class="row mt-4">
+                    <!-- Product Distribution by Category -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-chart-pie me-2"></i>Product Distribution by Category
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="categoryChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Range Distribution -->
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-tags me-2"></i>Price Range Distribution
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="priceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Table -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span><i class="fas fa-list me-2"></i>Product Listings</span>
+                                <div>
+                                    <button class="btn btn-sm btn-market">
+                                        <i class="fas fa-plus me-1"></i> Add Product
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover data-table" id="productsTable">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Category</th>
+                                                <th>Price</th>
+                                                <th>Trend</th>
+                                                <th>Seasonal Sale</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>realme GT 7 Pro</td>
+                                                <td><span class="badge bg-primary category-badge">Mobiles</span></td>
+                                                <td>₹49,999</td>
+                                                <td><span class="trend-indicator trend-up"><i class="fas fa-arrow-up me-1"></i> 12%</span></td>
+                                                <td>Amazon Great Indian Festival (Oct), Flipkart Big Billion Days (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Google Pixel 9A</td>
+                                                <td><span class="badge bg-primary category-badge">Mobiles</span></td>
+                                                <td>₹41,420</td>
+                                                <td><span class="trend-indicator trend-up"><i class="fas fa-arrow-up me-1"></i> 8%</span></td>
+                                                <td>Amazon Great Indian Festival (Oct), Flipkart Big Billion Days (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nothing Phone 3</td>
+                                                <td><span class="badge bg-primary category-badge">Mobiles</span></td>
+                                                <td>₹49,717</td>
+                                                <td><span class="trend-indicator trend-up"><i class="fas fa-arrow-up me-1"></i> 15%</span></td>
+                                                <td>Amazon Great Indian Festival (Oct), Flipkart Big Billion Days (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Motorola Razr 60</td>
+                                                <td><span class="badge bg-primary category-badge">Mobiles</span></td>
+                                                <td>₹49,825</td>
+                                                <td><span class="trend-indicator trend-down"><i class="fas fa-arrow-down me-1"></i> 5%</span></td>
+                                                <td>Amazon Great Indian Festival (Oct), Flipkart Big Billion Days (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Infinix Zero Flip</td>
+                                                <td><span class="badge bg-primary category-badge">Mobiles</span></td>
+                                                <td>₹44,999</td>
+                                                <td><span class="trend-indicator trend-up"><i class="fas fa-arrow-up me-1"></i> 22%</span></td>
+                                                <td>Amazon Great Indian Festival (Oct), Flipkart Big Billion Days (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Samsung 163 cm LED TV</td>
+                                                <td><span class="badge bg-info category-badge">Televisions</span></td>
+                                                <td>₹32,999</td>
+                                                <td><span class="trend-indicator trend-up"><i class="fas fa-arrow-up me-1"></i> 7%</span></td>
+                                                <td>Republic Day Sale (Jan), Diwali/Great Indian Festival (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>LG 260L Refrigerator</td>
+                                                <td><span class="badge bg-success category-badge">Refrigerators</span></td>
+                                                <td>₹28,500</td>
+                                                <td><span class="trend-indicator trend-down"><i class="fas fa-arrow-down me-1"></i> 3%</span></td>
+                                                <td>Republic Day Sale (Jan), Diwali/Great Indian Festival (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Whirlpool Washing Machine</td>
+                                                <td><span class="badge bg-warning category-badge">Washing Machines</span></td>
+                                                <td>₹18,999</td>
+                                                <td><span class="trend-indicator trend-up"><i class="fas fa-arrow-up me-1"></i> 9%</span></td>
+                                                <td>Republic Day Sale (Jan), Diwali/Great Indian Festival (Oct)</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-chart-line"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trends Tab -->
+            <div class="tab-pane fade" id="trends" role="tabpanel">
+                <div class="row mt-4">
+                    <!-- Search Trends by Category -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span><i class="fas fa-search-trend me-2"></i>Google Trends by Category</span>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary" id="trendToggle">
+                                        <i class="fas fa-chart-bar me-1"></i> Switch View
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container" style="height: 400px;">
+                                    <canvas id="trendChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seasonal Trends -->
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-calendar-alt me-2"></i>Seasonal Sales Calendar
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="seasonalChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-percentage me-2"></i>Category Market Share
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="marketShareChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments Tab -->
+            <div class="tab-pane fade" id="payments" role="tabpanel">
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-credit-card me-2"></i>Payment Failure Rates
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="paymentChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-money-bill-trend-up me-2"></i>Transaction Volume
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="transactionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-table me-2"></i>RBI Payment Metrics
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Period</th>
+                                                <th>UPI Failure Rate</th>
+                                                <th>Card Failure Rate</th>
+                                                <th>Net Banking Failure</th>
+                                                <th>Total Transactions</th>
+                                                <th>Success Rate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2024-01</td>
+                                                <td>2.1%</td>
+                                                <td>3.5%</td>
+                                                <td>4.2%</td>
+                                                <td>450,000,000</td>
+                                                <td><span class="trend-indicator trend-up">97.9%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2024-02</td>
+                                                <td>1.8%</td>
+                                                <td>3.2%</td>
+                                                <td>3.9%</td>
+                                                <td>480,000,000</td>
+                                                <td><span class="trend-indicator trend-up">98.2%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2024-03</td>
+                                                <td>2.3%</td>
+                                                <td>3.8%</td>
+                                                <td>4.5%</td>
+                                                <td>510,000,000</td>
+                                                <td><span class="trend-indicator trend-down">97.7%</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2024-04</td>
+                                                <td>2.0%</td>
+                                                <td>3.4%</td>
+                                                <td>4.1%</td>
+                                                <td>540,000,000</td>
+                                                <td><span class="trend-indicator trend-up">98.0%</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations Tab -->
+            <div class="tab-pane fade" id="recommendations" role="tabpanel">
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-lightbulb me-2"></i>Strategic Recommendations
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card mb-3 border-success">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-success">Payment Optimization</h5>
+                                                <p class="card-text">Implement fallback payment options to reduce UPI failure impact</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="badge bg-success">High Priority</span>
+                                                    <small class="text-muted">Impact: 15% reduction in cart abandonment</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card mb-3 border-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-primary">Seasonal Strategy</h5>
+                                                <p class="card-text">Align product launches with festive seasons for maximum impact</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="badge bg-primary">Medium Priority</span>
+                                                    <small class="text-muted">Impact: 20% higher conversion during festivals</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card mb-3 border-warning">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-warning">Pricing Strategy</h5>
+                                                <p class="card-text">Focus on ₹15,000-₹30,000 price range for maximum market coverage</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="badge bg-warning">High Priority</span>
+                                                    <small class="text-muted">Impact: 35% of market in this range</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card mb-3 border-info">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-info">Category Expansion</h5>
+                                                <p class="card-text">Increase focus on Fashion & Apparel (33% market share)</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <span class="badge bg-info">Medium Priority</span>
+                                                    <small class="text-muted">Impact: Access to $41B market segment</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fas fa-rocket me-2"></i>Implementation Roadmap
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="roadmap-container">
+                                            <div class="roadmap">
+                                                <div class="roadmap-phase">
+                                                    <div class="phase-header">Q3 2024</div>
+                                                    <ul>
+                                                        <li>Payment system optimization</li>
+                                                        <li>Festive season planning</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="roadmap-phase">
+                                                    <div class="phase-header">Q4 2024</div>
+                                                    <ul>
+                                                        <li>Diwali campaign execution</li>
+                                                        <li>New category research</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="roadmap-phase">
+                                                    <div class="phase-header">Q1 2025</div>
+                                                    <ul>
+                                                        <li>Republic Day sales initiative</li>
+                                                        <li>Fashion category expansion</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="roadmap-phase">
+                                                    <div class="phase-header">Q2 2025</div>
+                                                    <ul>
+                                                        <li>Summer product line launch</li>
+                                                        <li>Payment analytics enhancement</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted">MarketPulse E-commerce Analytics Dashboard &copy; 2023</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted">Data sourced from 91mobiles, PriceDekho, RBI, and IBEF</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Category Distribution Chart
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            const categoryChart = new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Mobiles', 'Laptops', 'Tablets', 'Smartwatches', 'Televisions', 'Air Conditioners', 'Refrigerators', 'Washing Machines'],
+                    datasets: [{
+                        data: [35, 18, 12, 10, 15, 8, 7, 5],
+                        backgroundColor: [
+                            '#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', 
+                            '#e74a3b', '#858796', '#f8f9fc', '#5a5c69'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // Price Range Chart
+            const priceCtx = document.getElementById('priceChart').getContext('2d');
+            const priceChart = new Chart(priceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Under ₹15,000', '₹15,000 - ₹30,000', '₹30,000 - ₹50,000', 'Above ₹50,000'],
+                    datasets: [{
+                        label: 'Number of Products',
+                        data: [28, 45, 52, 17],
+                        backgroundColor: '#4e73df',
+                        hoverBackgroundColor: '#2e59d9'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Google Trends Chart
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            let trendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [
+                        {
+                            label: 'Mobiles',
+                            data: [65, 59, 60, 58, 56, 55, 60, 65, 70, 85, 82, 78],
+                            borderColor: '#4e73df',
+                            tension: 0.3,
+                            fill: false
+                        },
+                        {
+                            label: 'Laptops',
+                            data: [28, 35, 40, 36, 45, 48, 50, 58, 62, 70, 65, 60],
+                            borderColor: '#1cc88a',
+                            tension: 0.3,
+                            fill: false
+                        },
+                        {
+                            label: 'Televisions',
+                            data: [45, 42, 40, 38, 45, 50, 55, 60, 65, 75, 70, 68],
+                            borderColor: '#36b9cc',
+                            tension: 0.3,
+                            fill: false
+                        },
+                        {
+                            label: 'Refrigerators',
+                            data: [30, 32, 34, 36, 40, 45, 55, 60, 50, 48, 45, 42],
+                            borderColor: '#f6c23e',
+                            tension: 0.3,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Trend Index'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Seasonal Chart
+            const seasonalCtx = document.getElementById('seasonalChart').getContext('2d');
+            const seasonalChart = new Chart(seasonalCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Sales Intensity',
+                        data: [65, 45, 40, 35, 45, 50, 55, 60, 75, 95, 90, 80],
+                        backgroundColor: '#4e73df',
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Sales Intensity Index'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Market Share Chart
+            const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+            const marketShareChart = new Chart(marketShareCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Fashion & Apparel', 'Electronics', 'Home & Kitchen', 'Others'],
+                    datasets: [{
+                        data: [33, 28, 15, 24],
+                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+
+            // Payment Chart
+            const paymentCtx = document.getElementById('paymentChart').getContext('2d');
+            const paymentChart = new Chart(paymentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['UPI', 'Credit/Debit Cards', 'Net Banking', 'Wallets', 'COD'],
+                    datasets: [{
+                        label: 'Failure Rate (%)',
+                        data: [2.1, 3.5, 4.2, 1.8, 0.5],
+                        backgroundColor: [
+                            '#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'
+                        ],
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Failure Rate (%)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Transaction Chart
+            const transactionCtx = document.getElementById('transactionChart').getContext('2d');
+            const transactionChart = new Chart(transactionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+                    datasets: [{
+                        label: 'Transaction Volume (Millions)',
+                        data: [450, 480, 510, 540],
+                        borderColor: '#4e73df',
+                        tension: 0.3,
+                        fill: false
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Transactions (Millions)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Toggle between line and bar chart for trends
+            document.getElementById('trendToggle').addEventListener('click', function() {
+                const isLine = trendChart.config.type === 'line';
+                
+                // Destroy current chart
+                trendChart.destroy();
+                
+                // Create new chart with toggled type
+                trendChart = new Chart(trendCtx, {
+                    type: isLine ? 'bar' : 'line',
+                    data: trendChart.data,
+                    options: trendChart.options
+                });
+                
+                // Update button icon
+                const icon = this.querySelector('i');
+                icon.className = isLine ? 'fas fa-chart-line' : 'fas fa-chart-bar';
+            });
+
+            // Filter functionality
+            document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+            document.getElementById('priceFilter').addEventListener('change', applyFilters);
+            document.getElementById('trendFilter').addEventListener('change', applyFilters);
+            
+            function applyFilters() {
+                const categoryFilter = document.getElementById('categoryFilter').value;
+                const priceFilter = document.getElementById('priceFilter').value;
+                const trendFilter = document.getElementById('trendFilter').value;
+                
+                const rows = document.querySelectorAll('#productsTable tbody tr');
+                
+                rows.forEach(row => {
+                    const category = row.querySelector('td:nth-child(2)').textContent;
+                    const priceText = row.querySelector('td:nth-child(3)').textContent;
+                    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+                    const trend = row.querySelector('td:nth-child(4) span').classList.contains('trend-up') ? 'up' : 'down';
+                    
+                    let categoryMatch = !categoryFilter || category.includes(categoryFilter);
+                    let priceMatch = !priceFilter || (
+                        (priceFilter === 'low' && price < 15000) ||
+                        (priceFilter === 'medium' && price >= 15000 && price <= 30000) ||
+                        (priceFilter === 'high' && price > 30000 && price <= 50000) ||
+                        (priceFilter === 'premium' && price > 50000)
+                    );
+                    let trendMatch = !trendFilter || trend === trendFilter;
+                    
+                    row.style.display = (categoryMatch && priceMatch && trendMatch) ? '' : 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
