@@ -279,7 +279,7 @@ Key outcomes:
 
 ## 📦 7. Deliverables
 - 📄 **README.md** → Detailed analysis & recommendations  
-- 🤖 **XGBoost model** (`delivery_time_xgb_tuned.pkl`)  
-- 📊 **Interactive Dashboard** (`Ecom_Dashboard.html`)  
-- 📒 **Notebook** (`ecom_final.ipynb`)  
-- 📈 **Processed dataset** (`final_enhanced_dataset.csv`)  
+- 🤖 **XGBoost model** ([`delivery_time_xgb_tuned.pkl`](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python))  
+- 📊 **Interactive Dashboard** [(`Ecom_Dashboard.html`)  ](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/Indian-Ecommerce-EDA-ML-Python.ipynb)
+- 📒 **Notebook** [(`ecom_final.ipynb`)  ](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/Indian-Ecommerce-EDA-ML-Python.ipynb)
+- 📈 **Processed dataset** [(`final_enhanced_dataset.csv`)](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/final_enhanced_dataset_1.csv)  
