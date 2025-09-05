@@ -12,6 +12,11 @@ This project integrates **web scraping, Google Trends, RBI analytics, and machin
 📊 Market Intelligence • 💳 Payment Analytics • 🚚 Delivery Time Prediction • 📈 Strategic Recommendations
 
 ---
+## 👨‍💻 Author
+**Abhijeet Kanse**  
+📧 Email: abhijeetkanse@33gmail.com
+🌐 [GitHub Profile](https://github.com/Abhijeet-Kanse)
+---
 
 ## 🔥 Features
 - **Web Scraping** → 91Mobiles, PriceDekho, Amazon Kaggle delivery dataset, RBI, Google Trends.  
