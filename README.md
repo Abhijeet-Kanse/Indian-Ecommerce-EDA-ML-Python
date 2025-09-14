@@ -50,7 +50,7 @@ This project delivers actionable insights by integrating **multi-source data (sc
 
 ---
 
-## 🔍 Research Questions & Key Findings
+## 🔍 4. Research Questions & Key Findings
 
 ## Question 1:What are the seasonal trends for different e-commerce categories? 
 ```
@@ -272,7 +272,7 @@ By integrating the model into operations, businesses can reduce delays, improve 
 
 ---
 
-## ✅ 8. Conclusion
+## ✅ 7. Conclusion
 This project shows how **multi-source data fusion + ML + strategy** can turn raw data into **actionable insights**.  
 Key outcomes:  
 - 🎯 Pricing sweet spot (₹15K–₹30K)  
@@ -282,7 +282,7 @@ Key outcomes:
 - India’s $125B e-commerce market can unlock **sustainable growth** with these strategies.
 
 
-## 📦 7. Deliverables
+## 📦 8. Deliverables
 - 📄 **README.md** → Detailed analysis & recommendations  
 - 🤖 **XGBoost model** ([`delivery_time_xgb_tuned.pkl`](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python))  
 - 📊 **Interactive Dashboard** [(`Dashboard.html`)  ](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/Indian-Ecommerce-EDA-ML-Python.ipynb)
