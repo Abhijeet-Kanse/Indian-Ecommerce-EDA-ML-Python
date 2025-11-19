@@ -14,8 +14,6 @@ This project integrates **web scraping, Google Trends, RBI analytics, and machin
 ---
 ## Author
 **Abhijeet Kanse**  
-Email: abhijeetkanse@33gmail.com
-[GitHub Profile](https://github.com/Abhijeet-Kanse)
 ---
 
 ## Features
