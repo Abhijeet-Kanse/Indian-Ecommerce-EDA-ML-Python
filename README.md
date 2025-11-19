@@ -1,4 +1,4 @@
-# 🚀Indian E-Commerce Market Analysis using Python, EDA & ML
+# Indian E-Commerce Market Analysis using Python, EDA & ML
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Pandas](https://img.shields.io/badge/Pandas-1.3%2B-orange)
@@ -12,13 +12,13 @@ This project integrates **web scraping, Google Trends, RBI analytics, and machin
 📊 Market Intelligence • 💳 Payment Analytics • 🚚 Delivery Time Prediction • 📈 Strategic Recommendations
 
 ---
-## 👨‍💻 Author
+## Author
 **Abhijeet Kanse**  
-📧 Email: abhijeetkanse@33gmail.com
-🌐 [GitHub Profile](https://github.com/Abhijeet-Kanse)
+Email: abhijeetkanse@33gmail.com
+[GitHub Profile](https://github.com/Abhijeet-Kanse)
 ---
 
-## 🔥 Features
+## Features
 - **Web Scraping** → 91Mobiles, PriceDekho, Amazon Kaggle delivery dataset, RBI, Google Trends.  
 - **Real-Time Analytics** → Festive season mapping, UPI failure analysis.  
 - **Machine Learning** → XGBoost delivery time model (R² = 0.89).  
@@ -26,22 +26,22 @@ This project integrates **web scraping, Google Trends, RBI analytics, and machin
 <img width="827" height="788" alt="Screenshot 2025-09-04 191810" src="https://github.com/user-attachments/assets/00f061c6-c922-495a-860f-9a6c7108fe7f" />
 
 
-## 🎯 1. Introduction
+## 1. Introduction
 India’s e-commerce market is projected to reach **$143.75B by 2025** at **15% CAGR**.  
 This project delivers actionable insights by integrating **multi-source data (scraping + APIs + Kaggle)** with **machine learning**.
 
 ---
 
-## 📊 2. Data Sources
-- 🌐 **91Mobiles.com** → Smartphone product listings  
-- 💰 **PriceDekho.com** → Price comparisons  
-- 📦 **Amazon Kaggle Dataset** → Delivery performance (distance, traffic, ratings)  
-- 🏦 **RBI Payment Reports** → UPI, card, net banking failures  
-- 🔍 **Google Trends API** → Seasonal search patterns  
+## 2. Data Sources
+-  **91Mobiles.com** → Smartphone product listings  
+-  **PriceDekho.com** → Price comparisons  
+-  **Amazon Kaggle Dataset** → Delivery performance (distance, traffic, ratings)  
+-  **RBI Payment Reports** → UPI, card, net banking failures  
+-  **Google Trends API** → Seasonal search patterns  
 
 ---
 
-## ⚙️ 3. Methodology
+## 3. Methodology
 1. **Data Collection** – Scrapers + APIs + Kaggle integration  
 2. **Preprocessing** – Missing values, outliers, normalization  
 3. **EDA** – Category share, price trends, seasonality, payment failures  
@@ -50,7 +50,7 @@ This project delivers actionable insights by integrating **multi-source data (sc
 
 ---
 
-## 🔍 4. Research Questions & Key Findings
+## 4. Research Questions & Key Findings
 
 ## Question 1:What are the seasonal trends for different e-commerce categories? 
 ```
@@ -249,42 +249,42 @@ By integrating the model into operations, businesses can reduce delays, improve 
 ## 🛠️ 5. Strategic Recommendations
 
 - **Immediate (0–3 months):**  
-  🎯 Focus on ₹15K–₹30K range  
-  ⚡ Reduce UPI failure rate (2.1%)  
-  📅 Align launches with Q4 festivals  
+    Focus on ₹15K–₹30K range  
+    Reduce UPI failure rate (2.1%)  
+    Align launches with Q4 festivals  
 
 - **Medium-Term (3–12 months):**  
-  🤖 Deploy predictive delivery ML  
-  🛍️ Expand in Fashion & Electronics  
-  ⭐ Maintain ≥4★ reviews  
+    Deploy predictive delivery ML  
+    Expand in Fashion & Electronics  
+    Maintain ≥4★ reviews  
 
 - **Long-Term (12+ months):**  
-  🏙️ Expand into Tier-2 cities  
-  📊 Introduce AI-driven dynamic pricing  
-  🔒 Explore blockchain for payments  
+    Expand into Tier-2 cities  
+    Introduce AI-driven dynamic pricing  
+    Explore blockchain for payments  
 
 ---
 
-## 📈 6. Business Impact
-- 📈 **Revenue Increase:** +18–25% via optimized pricing & timing  
-- 💸 **Cost Reduction:** 15–20% via better logistics  
-- 😀 **Customer Satisfaction:** +30% with accurate delivery ETAs  
+##   6. Business Impact
+-    **Revenue Increase:** +18–25% via optimized pricing & timing  
+-    **Cost Reduction:** 15–20% via better logistics  
+-    **Customer Satisfaction:** +30% with accurate delivery ETAs  
 
 ---
 
-## ✅ 7. Conclusion
+##   7. Conclusion
 This project shows how **multi-source data fusion + ML + strategy** can turn raw data into **actionable insights**.  
 Key outcomes:  
-- 🎯 Pricing sweet spot (₹15K–₹30K)  
-- 💳 UPI optimization saves ₹2.8M/month  
-- 📅 Festive launches drive +45% sales  
-- 🚚 Predictive delivery improves efficiency
+-   Pricing sweet spot (₹15K–₹30K)  
+-   UPI optimization saves ₹2.8M/month  
+-   Festive launches drive +45% sales  
+-   Predictive delivery improves efficiency
 - India’s $125B e-commerce market can unlock **sustainable growth** with these strategies.
 
 
-## 📦 8. Deliverables
-- 📄 **README.md** → Detailed analysis & recommendations  
-- 🤖 **XGBoost model** ([`delivery_time_xgb_tuned.pkl`](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python))  
-- 📊 **Interactive Dashboard** [(`Dashboard.html`)  ](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/Indian-Ecommerce-EDA-ML-Python.ipynb)
-- 📒 **Notebook** [(`python_file`)  ](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/Indian-Ecommerce-EDA-ML-Python.ipynb)
-- 📈 **Processed dataset** [(`final_enhanced_dataset.csv`)](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/final_enhanced_dataset_1.csv)  
+##  8. Deliverables
+-   **README.md** → Detailed analysis & recommendations  
+-   **XGBoost model** ([`delivery_time_xgb_tuned.pkl`](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python))  
+-   **Interactive Dashboard** [(`Dashboard.html`)  ](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/Indian-Ecommerce-EDA-ML-Python.ipynb)
+-   **Notebook** [(`python_file`)  ](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/Indian-Ecommerce-EDA-ML-Python.ipynb)
+-   **Processed dataset** [(`final_enhanced_dataset.csv`)](https://github.com/Abhijeet-Kanse/Indian-Ecommerce-EDA-ML-Python/blob/main/final_enhanced_dataset_1.csv)  
